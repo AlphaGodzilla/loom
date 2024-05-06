@@ -5,12 +5,13 @@ use axum::response::{IntoResponse, Response};
 use axum::Router;
 use axum::routing::{get, post};
 use tokio::signal;
+use crate::config::Config;
 
 use crate::handler_match::{handler_match, TraderMarketWrap};
 
-pub async fn start_http_server(market: TraderMarketWrap) {
+pub async fn start_http_server(config: &Config, market: TraderMarketWrap) {
     let app = router(Arc::clone(&market));
-    serve(app, Arc::clone(&market)).await;
+    serve(config, app, Arc::clone(&market)).await;
 }
 
 async fn handler_ping() -> &'static str {
@@ -31,8 +32,9 @@ fn router(market: TraderMarketWrap) -> Router {
         .merge(match_handler)
 }
 
-async fn serve(app: Router, market: TraderMarketWrap) {
-    let listener = tokio::net::TcpListener::bind("0.0.0.0:7001").await.unwrap();
+async fn serve(config: &Config, app: Router, market: TraderMarketWrap) {
+    let addr = format!("0.0.0.0:{}", config.server.port.unwrap_or(7001));
+    let listener = tokio::net::TcpListener::bind(addr).await.unwrap();
     println!("Listening on {}", listener.local_addr().unwrap());
     axum::serve(listener, app)
         .with_graceful_shutdown(shutdown_signal(market))

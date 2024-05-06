@@ -5,7 +5,7 @@ use loom_core::market::MatchTrade;
 
 use crate::cache::CacheManager;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub enum TradeConsumer {
     Console(ConsoleConsumer),
     RedisQueue(RedisQueueConsumer),
@@ -16,7 +16,7 @@ pub trait Consumer {
     async fn consume(&self, trades: Vec<MatchTrade>) -> anyhow::Result<()>;
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct ConsoleConsumer {}
 
 #[async_trait]

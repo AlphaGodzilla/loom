@@ -5,6 +5,7 @@ use bb8_redis::{bb8, RedisConnectionManager};
 use bb8_redis::bb8::Pool;
 use log::debug;
 use redis::aio::MultiplexedConnection;
+use redis::ConnectionLike;
 use serde::{Deserialize, Serialize};
 use validator::HasLen;
 

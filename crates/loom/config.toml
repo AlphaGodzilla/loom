@@ -1,0 +1,18 @@
+consumer = "Redis"
+
+[server]
+port = 7002
+
+
+[cache]
+backend = "Redis"
+
+[cache.redis]
+host = "localhost"
+port = 6379
+database = 1
+
+[market]
+symbols = [
+    "LOOM-USDT-SPOT"
+]
