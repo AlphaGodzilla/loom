@@ -1,0 +1,22 @@
+[workspace]
+members = ["crates/core", "crates/loom", "crates/engine"]
+default-members = ["crates/loom"]
+resolver = "2"
+
+[workspace.dependencies]
+loom = { path = "crates/loom" }
+loom_core = { path = "crates/core" }
+loom_engine = { path = "crates/engine" }
+
+bigdecimal = { version = "0.4.3", features = ["std", "serde"] }
+tokio = { version = "1.37.0", features = ["full"] }
+env_logger = "0.11.3"
+log = "0.4.21"
+anyhow = "1.0.82"
+async-trait = "0.1.80"
+axum = "0.7.5"
+serde = {version = "1.0.198", features = ["derive"]}
+serde_json = "1.0.116"
+validator = {version = "0.15.0", features = ["derive"]}
+bb8-redis = "0.15.0"
+redis = {version = "0.25.3", features = ["script", "tokio-comp"]}

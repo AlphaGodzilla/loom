@@ -1,0 +1,18 @@
+[package]
+name = "loom_engine"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+env_logger.workspace = true
+log.workspace = true
+loom_core.workspace = true
+tokio.workspace = true
+anyhow.workspace = true
+async-trait.workspace = true
+serde.workspace = true
+bb8-redis.workspace = true
+redis.workspace = true
+serde_json.workspace = true
+validator.workspace = true
+bigdecimal.workspace = true
